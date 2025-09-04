@@ -130,19 +130,21 @@
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     let stars = [];
+function resize(){
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
 
-    function resize(){
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({length:600},()=>({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*1.5 + 0.5,
-        dx:(Math.random()-0.5)*0.4,
-        dy:(Math.random()-0.5)*0.4
-      }));
-    }
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
+  stars = Array.from({length:600},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5 + 0.5,
+    dx:(Math.random()-0.5)*0.4,
+    dy:(Math.random()-0.5)*0.4
+  }));
+}
     function draw(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       ctx.fillStyle="#fff";
@@ -162,4 +164,5 @@
     resize();
     draw();
   </script></body>
+
 </html>
