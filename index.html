@@ -127,42 +127,52 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>  <script>
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-function resize(){
-  canvas.style.width = window.innerWidth + "px";
-  canvas.style.height = window.innerHeight + "px";
+    <canvas id="starfield"></canvas>
+<script>
+const canvas = document.getElementById("starfield");
+const ctx = canvas.getContext("2d");
+let stars = [];
 
+function resize(){
+  // canvas ko full screen karo
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
+  // stars regenerate
   stars = Array.from({length:600},()=>({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.5 + 0.5,
-    dx:(Math.random()-0.5)*0.4,
-    dy:(Math.random()-0.5)*0.4
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.5,
+    dx: (Math.random() - 0.5) * 0.4,
+    dy: (Math.random() - 0.5) * 0.4
   }));
 }
-    function draw(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle="#fff";
-      stars.forEach(s=>{
-        ctx.beginPath();
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fill();
-        s.x+=s.dx;
-        s.y+=s.dy;
-        if(s.x<0||s.x>canvas.width) s.dx*=-1;
-        if(s.y<0||s.y>canvas.height) s.dy*=-1;
-      });
-      requestAnimationFrame(draw);
-    }
 
-    window.addEventListener('resize',resize);
-    resize();
-    draw();
-  </script></body>
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "white";
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, 2*Math.PI);
+    ctx.fill();
+    s.x += s.dx;
+    s.y += s.dy;
+
+    if(s.x<0) s.x=canvas.width;
+    if(s.x>canvas.width) s.x=0;
+    if(s.y<0) s.y=canvas.height;
+    if(s.y>canvas.height) s.y=0;
+  });
+  requestAnimationFrame(draw);
+}
+
+// window resize par canvas adjust
+window.addEventListener("resize", resize);
+
+// pehle resize call + draw start
+resize();
+draw();
+</script></body>
 
 </html>
+
