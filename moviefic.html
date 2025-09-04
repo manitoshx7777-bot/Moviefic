@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moviefic</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        /* Center Moviefic (cmoviefic) with fade-in */
+        #center-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: red;
+            font-size: 6em;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        /* Banner Moviefic (amoviefic) with pop-up */
+        #banner {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(to right, red, darkred);
+            text-align: center;
+            padding: 10px 0;
+            transform: scaleY(0);
+            animation: popUp 1s 2s forwards;
+        }
+        #banner h2 {
+            color: white;
+            margin: 0;
+            font-size: 2em;
+        }
+        /* Menu bar */
+        #menu {
+            margin: 50px 0;
+            text-align: center;
+        }
+        #menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        #menu li {
+            display: inline;
+            margin: 0 20px;
+        }
+        #menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        /* Franchise list with fade-in effect */
+        #franchises {
+            text-align: center;
+            margin-top: 150px;
+        }
+        .franchise {
+            color: black;
+            font-size: 2em;
+            opacity: 0;
+            text-shadow: 0 0 10px #000, 0 0 20px #000;
+            animation: fadeInFranchise 0.5s forwards;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes popUp {
+            to { transform: scaleY(1); }
+        }
+        @keyframes fadeInFranchise {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Center Moviefic (cmoviefic) -->
+    <div id="center-title">MOVIEFIC</div>
+    <!-- Banner Moviefic (amoviefic) -->
+    <div id="banner">
+        <h2>MOVIEFIC</h2>
+    </div>
+    <!-- Menu Bar -->
+    <div id="menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+    <!-- Franchise List -->
+    <div id="franchises">
+        <div class="franchise" style="animation-delay: 3s;">Marvel</div>
+        <div class="franchise" style="animation-delay: 3.5s;">DC</div>
+        <div class="franchise" style="animation-delay: 4s;">Star Wars</div>
+        <div class="franchise" style="animation-delay: 4.5s;">Harry Potter</div>
+        <div class="franchise" style="animation-delay: 5s;">James Bond</div>
+        <div class="franchise" style="animation-delay: 5.5s;">Fast & Furious</div>
+        <div class="franchise" style="animation-delay: 6s;">Lord of the Rings</div>
+        <div class="franchise" style="animation-delay: 6.5s;">Pirates of the Caribbean</div>
+        <div class="franchise" style="animation-delay: 7s;">Jurassic Park</div>
+        <div class="franchise" style="animation-delay: 7.5s;">Transformers</div>
+        <!-- Add more franchises as needed -->
+    </div>
+</body>
+</html>
