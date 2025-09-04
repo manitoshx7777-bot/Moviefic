@@ -1,111 +1,147 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+<html lang="en">
 <head>
-    <title>Moviefic</title>
-    <style>
-        body {
-            background-color: black;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-        }
-        /* Center Moviefic (cmoviefic) with fade-in */
-        #center-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: red;
-            font-size: 6em;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-        }
-        /* Banner Moviefic (amoviefic) with pop-up */
-        #banner {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: linear-gradient(to right, red, darkred);
-            text-align: center;
-            padding: 10px 0;
-            transform: scaleY(0);
-            animation: popUp 1s 2s forwards;
-        }
-        #banner h2 {
-            color: white;
-            margin: 0;
-            font-size: 2em;
-        }
-        /* Menu bar */
-        #menu {
-            margin: 50px 0;
-            text-align: center;
-        }
-        #menu ul {
-            list-style: none;
-            padding: 0;
-        }
-        #menu li {
-            display: inline;
-            margin: 0 20px;
-        }
-        #menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-        /* Franchise list with fade-in effect */
-        #franchises {
-            text-align: center;
-            margin-top: 150px;
-        }
-        .franchise {
-            color: black;
-            font-size: 2em;
-            opacity: 0;
-            text-shadow: 0 0 10px #000, 0 0 20px #000;
-            animation: fadeInFranchise 0.5s forwards;
-        }
-        /* Animations */
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        @keyframes popUp {
-            to { transform: scaleY(1); }
-        }
-        @keyframes fadeInFranchise {
-            to { opacity: 1; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOVIEFIC — Bollywood, Hollywood and Beyond</title>
+  <style>
+    html,body{
+      margin:0;
+      padding:0;
+      background:#000;
+      color:#fff;
+      font-family:Arial, Helvetica, sans-serif;
+      overflow-x:hidden;
+    }
+    canvas{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-1;
+    }
+    .logo{
+      font-size:64px;
+      font-weight:900;
+      text-align:center;
+      color:transparent;
+      -webkit-text-stroke:2px #22d3ee;
+      text-stroke:2px #22d3ee;
+      margin-top:20vh;
+      opacity:0;
+      animation:fadeIn 2s ease forwards 1s;
+    }
+    @keyframes fadeIn{
+      to{opacity:1;}
+    }
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      background:linear-gradient(to right, red, black);
+      padding:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      transform:translateY(-100%);
+      animation:slideDown 1s ease forwards 2s;
+    }
+    @keyframes slideDown{
+      to{transform:translateY(0);}
+    }
+    header .brand{
+      font-size:24px;
+      font-weight:900;
+      color:transparent;
+      -webkit-text-stroke:1.5px #22d3ee;
+    }
+    header .menu{
+      font-size:28px;
+      cursor:pointer;
+    }
+    .sections{
+      margin-top:40px;
+      text-align:center;
+      opacity:0;
+      animation:fadeInUp 1s ease forwards 3s;
+    }
+    .sections div{
+      margin:14px 0;
+      font-size:22px;
+      font-weight:bold;
+      color:#fff;
+      text-shadow:2px 2px 6px #000;
+    }
+    @keyframes fadeInUp{
+      from{opacity:0; transform:translateY(20px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+    .footer-links{
+      margin-top:40px;
+      display:flex;
+      justify-content:center;
+      gap:40px;
+      opacity:0;
+      animation:fadeInUp 1s ease forwards 4s;
+    }
+    .footer-links a{
+      font-size:20px;
+      font-weight:bold;
+      color:#fff;
+      text-shadow:2px 2px 6px #000;
+      cursor:pointer;
+      text-decoration:none;
+    }
+  </style>
 </head>
 <body>
-    <!-- Center Moviefic (cmoviefic) -->
-    <div id="center-title">MOVIEFIC</div>
-    <!-- Banner Moviefic (amoviefic) -->
-    <div id="banner">
-        <h2>MOVIEFIC</h2>
-    </div>
-    <!-- Menu Bar -->
-    <div id="menu">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </div>
-    <!-- Franchise List -->
-    <div id="franchises">
-        <div class="franchise" style="animation-delay: 3s;">Marvel</div>
-        <div class="franchise" style="animation-delay: 3.5s;">DC</div>
-        <div class="franchise" style="animation-delay: 4s;">Star Wars</div>
-        <div class="franchise" style="animation-delay: 4.5s;">Harry Potter</div>
-        <div class="franchise" style="animation-delay: 5s;">James Bond</div>
-        <div class="franchise" style="animation-delay: 5.5s;">Fast & Furious</div>
-        <div class="franchise" style="animation-delay: 6s;">Lord of the Rings</div>
-        <div class="franchise" style="animation-delay: 6.5s;">Pirates of the Caribbean</div>
-        <div class="franchise" style="animation-delay: 7s;">Jurassic Park</div>
-        <div class="franchise" style="animation-delay: 7.5s;">Transformers</div>
-        <!-- Add more franchises as needed -->
-    </div>
-</body>
+  <canvas id="stars"></canvas>  <div class="logo">MOVIEFIC</div>  <header>
+    <div class="brand">MOVIEFIC</div>
+    <div class="menu">☰</div>
+  </header>  <div class="sections">
+    <div>Movie Franchises</div>
+    <div>New Movies</div>
+    <div>New Series</div>
+    <div>Upcoming Movies/Series</div>
+    <div>Horror</div>
+    <div>News</div>
+  </div>  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = Array.from({length:200},()=>({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5,
+        dx:(Math.random()-0.5)*0.2,
+        dy:(Math.random()-0.5)*0.2
+      }));
+    }
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#fff";
+      stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+        s.x+=s.dx;
+        s.y+=s.dy;
+        if(s.x<0||s.x>canvas.width) s.dx*=-1;
+        if(s.y<0||s.y>canvas.height) s.dy*=-1;
+      });
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize',resize);
+    resize();
+    draw();
+  </script></body>
 </html>
