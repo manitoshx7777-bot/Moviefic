@@ -1,0 +1,147 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOVIEFIC — Bollywood, Hollywood and Beyond</title>
+  <style>
+    html,body{
+      margin:0;
+      padding:0;
+      background:#000;
+      color:#fff;
+      font-family:Arial, Helvetica, sans-serif;
+      overflow-x:hidden;
+    }
+    canvas{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      z-index:-1;
+    }
+    .logo{
+      font-size:64px;
+      font-weight:900;
+      text-align:center;
+      color:transparent;
+      -webkit-text-stroke:2px #22d3ee;
+      text-stroke:2px #22d3ee;
+      margin-top:20vh;
+      opacity:0;
+      animation:fadeIn 2s ease forwards 1s;
+    }
+    @keyframes fadeIn{
+      to{opacity:1;}
+    }
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      background:linear-gradient(to right, red, black);
+      padding:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      transform:translateY(-100%);
+      animation:slideDown 1s ease forwards 2s;
+    }
+    @keyframes slideDown{
+      to{transform:translateY(0);}
+    }
+    header .brand{
+      font-size:24px;
+      font-weight:900;
+      color:transparent;
+      -webkit-text-stroke:1.5px #22d3ee;
+    }
+    header .menu{
+      font-size:28px;
+      cursor:pointer;
+    }
+    .sections{
+      margin-top:40px;
+      text-align:center;
+      opacity:0;
+      animation:fadeInUp 1s ease forwards 3s;
+    }
+    .sections div{
+      margin:14px 0;
+      font-size:22px;
+      font-weight:bold;
+      color:#fff;
+      text-shadow:2px 2px 6px #000;
+    }
+    @keyframes fadeInUp{
+      from{opacity:0; transform:translateY(20px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+    .footer-links{
+      margin-top:40px;
+      display:flex;
+      justify-content:center;
+      gap:40px;
+      opacity:0;
+      animation:fadeInUp 1s ease forwards 4s;
+    }
+    .footer-links a{
+      font-size:20px;
+      font-weight:bold;
+      color:#fff;
+      text-shadow:2px 2px 6px #000;
+      cursor:pointer;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>  <div class="logo">MOVIEFIC</div>  <header>
+    <div class="brand">MOVIEFIC</div>
+    <div class="menu">☰</div>
+  </header>  <div class="sections">
+    <div>Movie Franchises</div>
+    <div>New Movies</div>
+    <div>New Series</div>
+    <div>Upcoming Movies/Series</div>
+    <div>Horror</div>
+    <div>News</div>
+  </div>  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>  <script>
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = Array.from({length:200},()=>({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5,
+        dx:(Math.random()-0.5)*0.2,
+        dy:(Math.random()-0.5)*0.2
+      }));
+    }
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#fff";
+      stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+        s.x+=s.dx;
+        s.y+=s.dy;
+        if(s.x<0||s.x>canvas.width) s.dx*=-1;
+        if(s.y<0||s.y>canvas.height) s.dy*=-1;
+      });
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize',resize);
+    resize();
+    draw();
+  </script></body>
+</html>
