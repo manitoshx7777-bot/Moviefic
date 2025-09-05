@@ -26,13 +26,18 @@
   }
 
   header h1 {
-    font-size: 7rem; /* Increased from 5rem */
-    color: transparent;
-    -webkit-text-stroke: 3px #00f; /* blue outline */
-    text-shadow: 0 0 20px #00f, 0 0 40px #00f, 0 0 60px #00f;
-    letter-spacing: 8px;
-    font-weight: 900;
-  }
+  font-size: 7rem;
+  color: transparent;
+  -webkit-text-stroke: 3px #00f;
+  text-shadow: 0 0 20px #00f, 0 0 40px #00f, 0 0 60px #00f;
+  letter-spacing: 8px;
+  font-weight: 900;
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+@keyframes pulse-glow {
+  0%, 100% { text-shadow: 0 0 20px #00f, 0 0 40px #00f, 0 0 60px #00f; }
+  50% { text-shadow: 0 0 30px #00f, 0 0 50px #00f, 0 0 80px #00f; }
+}
 
   header p {
     margin-top: 20px; font-size: 1.2rem;
