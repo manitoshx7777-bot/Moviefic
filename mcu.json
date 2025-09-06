@@ -4,7 +4,7 @@
     "year": 2011,
     "type": "Movie",
     "phase": "Phase 1",
-    "poster": "images/cap-first-avenger.jpg",
+    "poster": "images/placeholder.jpg",
     "synopsis": "During World War II, Steve Rogers becomes Captain America to fight Hydra and the Red Skull."
   },
   {
@@ -12,7 +12,7 @@
     "year": 2008,
     "type": "Movie",
     "phase": "Phase 1",
-    "poster": "images/iron-man.jpg",
+    "poster": "images/placeholder.jpg",
     "synopsis": "Genius billionaire Tony Stark builds a suit of armor and becomes Iron Man."
   },
   {
@@ -20,7 +20,7 @@
     "year": 2021,
     "type": "Series",
     "phase": "Phase 4",
-    "poster": "images/wandavision.jpg",
+    "poster": "images/placeholder.jpg",
     "synopsis": "Wanda and Vision live an idyllic suburban life that hides mysterious forces at play."
   }
 ]
