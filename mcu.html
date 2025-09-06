@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marvel Cinematic Universe - MovieFic</title>
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="css/mcu.css">
+</head>
+<body>
+  <!-- Starfield Background -->
+  <canvas id="starfield"></canvas>
 
+  <!-- Header / Intro -->
+  <header id="intro">
+    <h1 id="banner-text">MARVEL<br>CINEMATIC<br>UNIVERSE</h1>
+    <p id="sub-text">Dive in the MCU</p>
+  </header>
+
+  <!-- Navigation (hamburger menu) -->
+  <nav id="menu">
+    <button id="menu-toggle" aria-label="Toggle Menu">☰</button>
+    <ul id="menu-items">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="mcu.html">MCU</a></li>
+    </ul>
+  </nav>
+
+  <!-- Filters & Search -->
+  <section id="controls">
+    <div id="toggle-order">
+      <button id="order-inverse">In-Universe Order</button>
+      <button id="order-release">Release Order</button>
+    </div>
+    <div id="filters">
+      <select id="filter-phase">
+        <option value="all">All Phases</option>
+        <option value="1">Phase 1</option>
+        <option value="2">Phase 2</option>
+        <option value="3">Phase 3</option>
+        <option value="4">Phase 4</option>
+        <option value="5">Phase 5</option>
+        <option value="6">Phase 6</option>
+      </select>
+      <select id="filter-type">
+        <option value="all">All Types</option>
+        <option value="Movie">Movies</option>
+        <option value="Series">Series</option>
+      </select>
+    </div>
+    <input type="text" id="search" placeholder="Search MCU...">
+  </section>
+
+  <!-- Timeline -->
+  <main id="timeline">
+    <!-- JS will inject movie/series cards here -->
+  </main>
+
+  <!-- Modal (hidden by default, created dynamically) -->
+  <div id="modal" class="hidden">
+    <div class="modal-content">
+      <span id="modal-close">&times;</span>
+      <div id="modal-body"><!-- Filled by JS --></div>
+    </div>
+  </div>
+
+  <!-- Commented audio -->
+  <!-- <audio id="bgMusic" src="audio/epic-theme.mp3" preload="auto"></audio> -->
+
+  <!-- External JS -->
+  <script src="js/mcu.js"></script>
+</body>
+</html>
