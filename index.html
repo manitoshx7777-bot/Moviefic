@@ -1,211 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MovieFic</title>
-<style>
-  /* Reset */
-  * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
-  body, html {height:100%; background: #000; color: #fff; overflow-x: hidden;}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Horrific — Movies by Fear</title>
+  <meta name="description" content="Horrific — discover the best horror movies and series by mood, era and terror level." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#071015; /* almost-black blue */
+      --card:#0d1418;
+      --accent:#c21b1b; /* blood red */
+      --muted:#99a3a6;
+      --glass: rgba(255,255,255,0.03);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,#020305 0%,var(--bg) 60%);color:#e9f0f2; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      padding-bottom:80px;
+    }
+    header{padding:18px 16px 10px;display:flex;gap:12px;align-items:center}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#1b0000,#380000);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .logo span{font-family:'Unica One',cursive;color:#fff;font-size:20px;letter-spacing:1px}
+    .title{line-height:1}
+    .title h1{margin:0;font-size:16px}
+    .title p{margin:0;font-size:12px;color:var(--muted)}.search-wrap{padding:12px 16px}
+.search{display:flex;gap:8px}
+.search input{flex:1;padding:12px 14px;border-radius:12px;border:0;background:var(--card);color:inherit;font-size:15px}
+.search button{padding:10px 12px;border-radius:12px;border:0;background:var(--accent);color:#fff;font-weight:600}
 
-  /* Starfield canvas */
-  #starfield {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    z-index: 0;
-    background: black;
-  }
+.hero{padding:10px 16px}
+.hero h2{margin:8px 0;font-size:20px}
+.mood-tiles{display:flex;gap:10px;overflow:auto;padding-bottom:8px}
+.mood{min-width:140px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.38));padding:14px;border-radius:12px;backdrop-filter: blur(4px);box-shadow:0 6px 20px rgba(0,0,0,0.5)}
+.mood h3{margin:0;font-size:14px}
+.mood p{margin:6px 0 0;color:var(--muted);font-size:12px}
 
-  /* Header */
-  header {
-    display:flex; justify-content:center; align-items:center;
-    height:100vh; text-align:center; flex-direction:column;
-    position: relative; z-index: 1;
-  }
+main{padding:10px 16px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.section-title h3{margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 
-  header h1 {
-  font-size: 7rem;
-  color: transparent;
-  -webkit-text-stroke: 3px #00f;
-  text-shadow: 0 0 20px #00f, 0 0 40px #00f, 0 0 60px #00f;
-  letter-spacing: 8px;
-  font-weight: 900;
-  animation: pulse-glow 2s infinite ease-in-out;
+.card{background:linear-gradient(180deg,var(--card), rgba(13,20,24,0.88));border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.6);position:relative}
+.poster{width:100%;height:220px;object-fit:cover;display:block}
+.card-body{padding:10px}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.rating{background:rgba(0,0,0,0.45);padding:6px 8px;border-radius:8px}
+.title-small{font-weight:600;margin:8px 0 0;font-size:14px}
+
+/* modal */
+.modal{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.86));display:none;align-items:flex-end;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.sheet{width:100%;max-width:760px;background:linear-gradient(180deg,#081014,#0b0f12);border-radius:18px;padding:16px}
+.sheet .head{display:flex;gap:12px}
+.sheet img{width:120px;height:170px;object-fit:cover;border-radius:8px}
+.sheet h2{margin:0}
+.sheet p{color:var(--muted);font-size:14px}
+.close-btn{position:absolute;right:18px;top:14px;background:transparent;border:0;color:var(--muted);font-size:18px}
+
+footer{position:fixed;left:0;right:0;bottom:0;padding:12px 16px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.6));display:flex;justify-content:center}
+.cta{background:linear-gradient(90deg,#6b0000,#c21b1b);padding:12px 18px;border-radius:999px;color:#fff;font-weight:700}
+
+/* responsive */
+@media(min-width:720px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .poster{height:240px}
+  header{padding:22px 28px}
+  .search-wrap{padding:22px 28px}
+  main{padding:18px 28px}
 }
-@keyframes pulse-glow {
-  0%, 100% { text-shadow: 0 0 20px #00f, 0 0 40px #00f, 0 0 60px #00f; }
-  50% { text-shadow: 0 0 50px #00f, 0 0 70px #00f, 0 0 100px #00f; }
-}
 
-  header p {
-    margin-top: 20px; font-size: 1.2rem;
-    color: #fff;
-    text-shadow: 0 0 5px #fff;
-  }
-
-  /* Navigation */
-  nav {
-    position: absolute; top: 20px; width:100%;
-    display:flex; justify-content:center; gap: 30px; z-index: 2;
-  }
-
-  nav a {
-    color:#fff; text-decoration:none; font-weight:bold;
-    transition: 0.3s; padding: 5px 10px;
-  }
-
-  nav a:hover {
-    color:#00f; text-shadow: 0 0 10px #00f;
-  }
-
-  /* Sections */
-  section {
-    min-height: 100vh; display:flex; justify-content:center; align-items:center;
-    color: #fff; text-align:center;
-    font-size: 2rem;
-    padding: 50px;
-    position: relative;
-    z-index: 1;
-  }
-
-  section:nth-child(odd) {background-color: rgba(20,20,20,0.4);}
-  section:nth-child(even) {background-color: rgba(0,0,40,0.4);}
-  
-  /* Button */
-  .btn {
-    margin-top: 20px; padding: 12px 25px; font-size: 1rem;
-    color:#fff; background:#00f; border:none; cursor:pointer;
-    text-transform: uppercase; letter-spacing: 2px;
-    transition: 0.3s; border-radius: 5px;
-  }
-
-  .btn:hover {background:#0080ff; box-shadow: 0 0 20px #00f;}
-  
-  /* Footer */
-  footer {
-    padding:20px; text-align:center;
-    background:#111; color:#fff;
-    font-size:0.9rem; position: relative; z-index:1;
-  }
-
-  /* Responsive */
-  @media(max-width:768px) {
-    header h1 {font-size: 5rem;} /* Increased from 3rem */
-    header p {font-size: 1rem;}
-    nav {flex-direction:column; gap: 15px;}
-    section {font-size:1.5rem;}
-  }
-
-  @media(max-width:480px) {
-    header h1 {font-size: 4rem;} /* Increased from 2.5rem */
-    section {font-size:1.2rem; padding: 30px;}
-    .btn {padding: 10px 20px; font-size:0.9rem;}
-  }
-</style>
+  </style>
 </head>
 <body>
+  <header>
+    <div class="brand">
+      <div class="logo"><span>H</span></div>
+      <div class="title">
+        <h1>Horrific</h1>
+        <p>Curated horror — discover by fear, vibe & era</p>
+      </div>
+    </div>
+  </header>  <div class="search-wrap">
+    <div class="search">
+      <input id="searchInput" placeholder="Search horror movies, series, actors..." aria-label="Search" />
+      <button id="searchBtn">Search</button>
+    </div>
+  </div>  <section class="hero">
+    <h2>Explore by terror</h2>
+    <div class="mood-tiles" id="moodTiles">
+      <div class="mood" data-filter="classic">
+        <h3>Classic Gothic</h3>
+        <p>Slow-burn dread, fog & candlelight</p>
+      </div>
+      <div class="mood" data-filter="slasher">
+        <h3>Slasher & Shock</h3>
+        <p>High tension, jump scares</p>
+      </div>
+      <div class="mood" data-filter="psych">
+        <h3>Psychological</h3>
+        <p>Mind-bending, unreliable narrators</p>
+      </div>
+      <div class="mood" data-filter="found">
+        <h3>Found Footage</h3>
+        <p>Raw, intimate, terrifying</p>
+      </div>
+    </div>
+  </section>  <main>
+    <div class="section-title">
+      <h3>Trending Horrors</h3>
+      <small id="trendNote" style="color:var(--muted)"></small>
+    </div><div id="moviesGrid" class="grid">
+  <!-- JS Injects movie cards here -->
+</div>
 
-<canvas id="starfield"></canvas>
+  </main>  <!-- Modal sheet -->  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="sheet" id="sheet">
+      <button class="close-btn" id="closeModal">✕</button>
+      <div class="head">
+        <img id="sheetPoster" alt="poster"/>
+        <div>
+          <h2 id="sheetTitle">Title</h2>
+          <div class="meta"><span id="sheetInfo"></span><span class="rating" id="sheetRating"></span></div>
+          <p id="sheetOverview"></p>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <a id="trailerLink" target="_blank" rel="noopener noreferrer" class="cta">Watch Trailer</a>
+      </div>
+    </div>
+  </div>  <footer>
+    <div class="cta" id="deployNote">Deploy: GitHub Pages • TMDB powered</div>
+  </footer>  <script>
+    // ========== CONFIG ==========
+    const TMDB_API_KEY = 'REPLACE_WITH_YOUR_TMDB_API_KEY'; // <<-- REPLACE THIS
+    const TMDB_BASE = 'https://api.themoviedb.org/3';
+    const IMG_BASE = 'https://image.tmdb.org/t/p/w500';
 
-<header>
-  <nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="mcu-setup/mcu.html">MCU</a></li>
-  </ul>
-  </nav>
-  <h1>MOVIEFIC</h1>
-  <p>Dive into the universe of movies and series</p>
-  <button class="btn">Explore Now</button>
-</header>
+    // Safety: warn if API key isn't set
+    function checkApiKey(){
+      if(!TMDB_API_KEY || TMDB_API_KEY.includes('REPLACE')){
+        document.getElementById('trendNote').textContent = 'TMDB API key missing. Replace TMDB_API_KEY in the code.';
+        const grid = document.getElementById('moviesGrid');
+        grid.innerHTML = '<div style="grid-column:1/-1;padding:18px;background:var(--glass);border-radius:12px;color:var(--muted)">Get a free TMDB API key and paste it into the code to enable movies.</div>';
+        return false;
+      }
+      return true;
+    }
 
-<section id="movies">
-  Latest Movies
-</section>
+    // Utility: fetch JSON
+    async function fetchJSON(url){
+      const res = await fetch(url);
+      if(!res.ok) throw new Error('Network error');
+      return res.json();
+    }
 
-<section id="series">
-  Trending Series
-</section>
+    // Build movie card
+    function createCard(movie){
+      const div = document.createElement('div'); div.className='card';
+      const img = document.createElement('img'); img.className='poster';
+      img.src = movie.poster_path ? IMG_BASE + movie.poster_path : 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="750"><rect width="100%" height="100%" fill="#111"/></svg>';
+      img.alt = movie.title || movie.name;
+      div.appendChild(img);
 
-<section id="contact">
-  Contact Us
-</section>
+      const body = document.createElement('div'); body.className='card-body';
+      const meta = document.createElement('div'); meta.className='meta';
+      const rel = document.createElement('div'); rel.textContent = (movie.release_date||movie.first_air_date||'—').slice(0,4);
+      const rating = document.createElement('div'); rating.className='rating'; rating.textContent = movie.vote_average ? movie.vote_average.toFixed(1) : '—';
+      meta.appendChild(rel); meta.appendChild(rating);
+      const t = document.createElement('div'); t.className='title-small'; t.textContent = movie.title || movie.name;
+      body.appendChild(meta); body.appendChild(t);
+      div.appendChild(body);
 
-<footer>
-  &copy; 2025 MovieFic. All rights reserved.
-</footer>
+      // click: open modal
+      div.addEventListener('click',()=>openModal(movie));
+      return div;
+    }
 
-<script>
-  // ⭐ Faster Spiral Starfield Animation
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let w = canvas.width = window.innerWidth;
-  let h = canvas.height = window.innerHeight;
+    // Open modal and fetch details + trailer
+    async function openModal(movie){
+      const modal = document.getElementById('modal');
+      const sheetPoster = document.getElementById('sheetPoster');
+      const sheetTitle = document.getElementById('sheetTitle');
+      const sheetOverview = document.getElementById('sheetOverview');
+      const sheetInfo = document.getElementById('sheetInfo');
+      const sheetRating = document.getElementById('sheetRating');
+      const trailerLink = document.getElementById('trailerLink');
 
-  const stars = [];
-  const numStars = 1000; // Number of stars
+      sheetTitle.textContent = movie.title||movie.name;
+      sheetOverview.textContent = movie.overview || 'No description available.';
+      sheetInfo.textContent = ((movie.release_date||movie.first_air_date)||'—').slice(0,10) + ' • ' + (movie.genre_ids ? movie.genre_ids.length + ' tags' : '');
+      sheetRating.textContent = movie.vote_average ? movie.vote_average.toFixed(1) : '—';
+      sheetPoster.src = movie.poster_path ? IMG_BASE + movie.poster_path : '';
 
-  // Generate stars with initial position and angle
-  for (let i = 0; i < numStars; i++) {
-    stars.push({
-      r: Math.random() * w * 0.5, // Radius from center
-      theta: Math.random() * 2 * Math.PI, // Random angle in radians
-      z: Math.random() * w, // Depth for 3D effect
-    });
-  }
+      trailerLink.href = '#'; trailerLink.textContent = 'Loading trailer...';
+      modal.classList.add('open');
 
-  function animate() {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, w, h);
-
-    // Draw stars
-    for (let i = 0; i < numStars; i++) {
-      let s = stars[i];
-      s.z -= 2; // Faster inward movement
-      if (s.z <= 0) s.z = w; // Reset to farthest distance
-      s.theta += 0.02; // Faster rotation for spiral
-
-      // Calculate polar coordinates with spiral
-      let k = 300 / s.z; // Projection factor
-      let x = s.r * Math.cos(s.theta) * k + w / 2; // Center x
-      let y = s.r * Math.sin(s.theta) * k + h / 2; // Center y
-
-      if (x >= 0 && x <= w && y >= 0 && y <= h) {
-        let size = Math.max(1, (1 - s.z / w) * 3); // Ensure minimum size
-        ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-
-        // Gradient for stars
-        let gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 2);
-        gradient.addColorStop(0, "white");
-        gradient.addColorStop(1, "blue");
-        ctx.fillStyle = gradient;
-        ctx.fill();
+      try{
+        // fetch videos
+        const url = `${TMDB_BASE}/movie/${movie.id}/videos?api_key=${TMDB_API_KEY}&language=en-US`;
+        const data = await fetchJSON(url);
+        const trailer = (data.results||[]).find(v=>v.type.toLowerCase().includes('trailer') && v.site==='YouTube');
+        if(trailer){
+          trailerLink.href = `https://www.youtube.com/watch?v=${trailer.key}`;
+          trailerLink.textContent = 'Watch Trailer on YouTube';
+        } else {
+          trailerLink.textContent = 'No trailer found';
+        }
+      }catch(err){
+        trailerLink.textContent = 'Trailer not available';
       }
     }
 
-    requestAnimationFrame(animate);
-  }
+    document.getElementById('closeModal').addEventListener('click',()=>{
+      document.getElementById('modal').classList.remove('open');
+    });
 
-  animate();
-
-  window.addEventListener("resize", () => {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-    // Regenerate stars on resize
-    stars.length = 0;
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
-        r: Math.random() * w * 0.5,
-        theta: Math.random() * 2 * Math.PI,
-        z: Math.random() * w,
-      });
+    // Fetch trending horror movies via TMDB discover (genre 27 = Horror)
+    async function loadTrending(){
+      if(!checkApiKey()) return;
+      const trendNote = document.getElementById('trendNote');
+      trendNote.textContent = 'Powered by TMDB';
+      const grid = document.getElementById('moviesGrid');
+      grid.innerHTML = '';
+      try{
+        // Discover horror, sorted by popularity
+        const url = `${TMDB_BASE}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=27&sort_by=popularity.desc&language=en-US&page=1`;
+        const data = await fetchJSON(url);
+        const movies = data.results || [];
+        if(movies.length===0){ grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:20px">No horror movies found.</div>'; return; }
+        movies.forEach(m=>grid.appendChild(createCard(m)));
+      }catch(err){
+        grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:20px">Unable to load movies. Check your API key and network.</div>'
+      }
     }
-  });
-</script>
 
-</body>
+    // Search function (search multi)
+    async function doSearch(q){
+      if(!q || !checkApiKey()) return;
+      const grid = document.getElementById('moviesGrid');
+      grid.innerHTML = '';
+      try{
+        const url = `${TMDB_BASE}/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(q)}&language=en-US&include_adult=false&page=1`;
+        const data = await fetchJSON(url);
+        const results = (data.results||[]).filter(r=>r.media_type==='movie' || r.media_type==='tv');
+        if(results.length===0){ grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:20px">No results for "'+q+'"</div>'; return; }
+        results.forEach(r=>grid.appendChild(createCard(r)));
+      }catch(err){
+        grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:20px">Search failed. Try again.</div>'
+      }
+    }
 
+    // Mood tile clicks
+    document.getElementById('moodTiles').addEventListener('click', (e)=>{
+      const mood = e.target.closest('.mood');
+      if(!mood) return;
+      const filter = mood.dataset.filter;
+      // quick filter mapping to keywords
+      const map = {
+        'classic':'vampire OR gothic OR borgo',
+        'slasher':'slasher OR serial killer OR revenge',
+        'psych':'psychological OR mind-bending OR thriller',
+        'found':'found footage OR documentary'
+      };
+      const q = map[filter] || filter;
+      document.getElementById('searchInput').value = q;
+      doSearch(q);
+    });
+
+    // Search button
+    document.getElementById('searchBtn').addEventListener('click',()=>{
+      const q = document.getElementById('searchInput').value.trim();
+      if(!q) return; doSearch(q);
+    });
+
+    // init
+    loadTrending();
+  </script></body>
 </html>
